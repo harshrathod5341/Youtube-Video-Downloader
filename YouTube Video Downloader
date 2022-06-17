@@ -1,0 +1,25 @@
+# install the pytube package and import YouTube from it
+from pytube import YouTube
+
+# ask the user to provide a link
+link = input("Enter the link: ")
+
+# pass the link to the YouTube class
+video = YouTube(link)
+
+# get the video details
+print("Title: ", video.title)
+print("Views: ", video.views)
+print("Rating: ", video.rating)
+print("Length: ", video.length)
+
+print("Streams: ", video.streams)
+print("Audio_streams: ", video.streams.filter(only_audio=True))
+print("Video_streams: ", video.streams.filter(only_video=True))
+
+# progressive streams can be downloaded
+print("Filter: ", video.streams.filter(progressive=True))
+
+Stream = video.streams.get_by_itag('22')
+Stream = video.streams.get_lowest_resolution()
+Stream.download('location')
